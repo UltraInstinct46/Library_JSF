@@ -18,9 +18,6 @@
                     <file>${file.reference.mysql-connector-java-8.0.29.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
-                <library dirs="200">
-                    <file>${file.reference.mysql-connector-java-8.0.29.jar-1}</file>
-                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
