@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2022 10:06:49 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.pojo.DataPeminjambuku" table="data_peminjambuku" catalog="db_library" optimistic-lock="version">
+        <id name="idPeminjam" type="java.lang.Integer">
+            <column name="id_peminjam" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="dataBuku" class="com.model.pojo.DataBuku" fetch="select">
+            <column name="id_buku" not-null="true" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="username" length="50" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="30" not-null="true" />
+        </property>
+        <property name="tglPinjam" type="date">
+            <column name="tgl_pinjam" length="10" not-null="true" />
+        </property>
+        <property name="tglPengembalian" type="date">
+            <column name="tgl_pengembalian" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

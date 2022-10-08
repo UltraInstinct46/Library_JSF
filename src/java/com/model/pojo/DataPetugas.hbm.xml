@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2022 10:06:49 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.pojo.DataPetugas" table="data_petugas" catalog="db_library" optimistic-lock="version">
+        <id name="idPetugas" type="java.lang.Integer">
+            <column name="id_petugas" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="multiuserLogin" class="com.model.pojo.MultiuserLogin" fetch="select">
+            <column name="username" length="50" not-null="true" />
+        </many-to-one>
+        <property name="namaPetugas" type="string">
+            <column name="nama_petugas" length="50" not-null="true" />
+        </property>
+        <property name="alamat" type="string">
+            <column name="alamat" length="50" not-null="true" />
+        </property>
+        <property name="noTelp" type="string">
+            <column name="no_telp" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

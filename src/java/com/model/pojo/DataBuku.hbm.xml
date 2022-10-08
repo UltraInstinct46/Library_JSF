@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2022 10:06:49 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.pojo.DataBuku" table="data_buku" catalog="db_library" optimistic-lock="version">
+        <id name="idBuku" type="java.lang.Integer">
+            <column name="id_buku" />
+            <generator class="identity" />
+        </id>
+        <property name="judulBuku" type="string">
+            <column name="judul_buku" length="50" not-null="true" />
+        </property>
+        <property name="penerbit" type="string">
+            <column name="penerbit" length="50" not-null="true" />
+        </property>
+        <property name="pengarang" type="string">
+            <column name="pengarang" length="50" not-null="true" />
+        </property>
+        <property name="tahunPenerbit" type="int">
+            <column name="tahun_penerbit" not-null="true" />
+        </property>
+        <property name="kategori" type="string">
+            <column name="kategori" length="30" not-null="true" />
+        </property>
+        <property name="stok" type="int">
+            <column name="stok" not-null="true" />
+        </property>
+        <set name="dataPeminjambukus" table="data_peminjambuku" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_buku" not-null="true" />
+            </key>
+            <one-to-many class="com.model.pojo.DataPeminjambuku" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2022 10:06:49 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.pojo.Siswa" table="siswa" catalog="db_library" optimistic-lock="version">
+        <id name="idSiswa" type="int">
+            <column name="id_siswa" />
+            <generator class="assigned" />
+        </id>
+        <property name="idUjian" type="int">
+            <column name="id_ujian" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
