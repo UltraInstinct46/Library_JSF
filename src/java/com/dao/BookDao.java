@@ -5,10 +5,12 @@
  */
 package com.dao;
 
+import com.model.pojo.Book;
+
 /**
  *
  * @author killua
  */
 public class BookDao {
-    
+private Book book;    
 }
