@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.pojo.Book;
 import com.util.HibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import org.hibernate.Query;
@@ -50,5 +51,66 @@ public class BookBean {
         session.flush();
         session.close();
         return userId;
+    }
+    
+    public List<Book> SearchBookId(String bookId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Book> daoSearchList = new ArrayList<>();
+        try{
+            session.beginTransaction();
+            Query qu = session.createQuery("From Book U where U.bookId =:bookId");
+            qu.setParameter("bookId",bookId);
+            daoSearchList = qu.list();
+            int count = daoSearchList.size();
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        finally{
+            session.close();
+        }
+        return daoSearchList;
+    }
+    public void add(Book newbook){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            String Id = Integer.toString(newbook.getId());
+            session.beginTransaction();
+            session.merge(newbook);
+            session.flush();
+            System.out.println("New user Saved, id : "+ newbook.getId());
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete(Book book){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            String name = book.getTitle();
+            session.beginTransaction();
+            session.delete(book);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void update(Book book){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+        session.beginTransaction();
+        session.update(book);
+        session.flush();
+        session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
     }
 }
