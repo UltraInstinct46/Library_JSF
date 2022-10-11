@@ -1,12 +1,14 @@
 package com.controller;
 
 import com.dao.BookDao;
-import com.model.pojo.Book;
+import com.model.pojo.DataBuku;
 import com.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,15 +25,17 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author killua
  */
+@ManagedBean(name = "bookBean") 
+@ViewScoped
 public class BookBean implements Serializable{
 public BookBean() {}
-private List < Book > booksList;
-private List < Book > searchList;
-private List < Book > searchBybookIdList;
+private List < DataBuku > booksList;
+private List < DataBuku > searchList;
+private List < DataBuku > searchBybookIdList;
 BookDao bookDao = new BookDao();
-Book book = new Book();
-Book newbook = new Book();
-public List < Book > getBooks() {
+DataBuku book = new DataBuku();
+DataBuku newbook = new DataBuku();
+public List < DataBuku > getBooks() {
     booksList = bookDao.AllBooks();
     int count = booksList.size();
     return booksList;
@@ -53,22 +57,22 @@ public void addBook() {
     String bookId = null;
     Integer userId = 0;
     userId = bookDao.getId();
-    newbook.setId(userId);
-    Integer Id = newbook.getId();
+    newbook.setIdBuku(userId);
+    Integer Id = newbook.getIdBuku();
     bookId = newBookID(Id);
-    newbook.setBookId(bookId);
+    newbook.setIdBuku(Integer.parseInt(bookId));
     bookDao.add(newbook);
     System.out.println("Book successfully saved.");
     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Save Information", "Book successfully saved.");
 
     RequestContext.getCurrentInstance().showMessageInDialog(message);
-    newbook = new Book();
+    newbook = new DataBuku();
 }
-public void changeBook(Book book) {
+public void changeBook(DataBuku book) {
     this.book = book;
 }
-public void UpdateBook(Book book) {
-    String Title = book.getTitle();
+public void UpdateBook(DataBuku book) {
+    String Title = book.getJudulBuku();
     FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "Title", Title);
 
     RequestContext.getCurrentInstance().showMessageInDialog(message1);
@@ -77,10 +81,10 @@ public void UpdateBook(Book book) {
     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Save Information", "Book updated successfully .");
 
     RequestContext.getCurrentInstance().showMessageInDialog(message);
-    book = new Book();
+    book = new DataBuku();
 }
-public void deleteBook(Book book) {
-    String Title = book.getTitle();
+public void deleteBook(DataBuku book) {
+    String Title = book.getJudulBuku();
     FacesMessage message3 = new FacesMessage(FacesMessage.SEVERITY_INFO, "Delete Item", Title); 
     RequestContext.getCurrentInstance().showMessageInDialog(message3);
     bookDao.delete(book);
@@ -90,53 +94,53 @@ public void deleteBook(Book book) {
 }
 public void searchbyBookId() {
     searchBybookIdList =
-    bookDao.SearchByBookId(book.getBookId());
+    bookDao.SearchByBookId(book.getIdBuku() + "");
     int count = searchBybookIdList.size();
     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Number of Record Selected:", Integer.toString(count));
 
     RequestContext.getCurrentInstance().showMessageInDialog(message);
 }
-public Book getBook() {
+public DataBuku getBook() {
     return book;
 }
-public void setUser(Book book) {
+public void setUser(DataBuku book) {
     this.book = book;
 }
-public Book getNewbook() {
+public DataBuku getNewbook() {
     return newbook;
 }
-public void setNewbook(Book newbook) {
+public void setNewbook(DataBuku newbook) {
     this.newbook = newbook;
 }
-public List < Book > getBooksList() {
+public List < DataBuku > getBooksList() {
     return booksList;
 }
-public void setBooksList(List < Book > booksList) {
+public void setBooksList(List < DataBuku > booksList) {
     this.booksList = booksList;
 }
-public List < Book > getSearchList() {
+public List < DataBuku > getSearchList() {
     return searchList;
 }
-public void setSearchList(List < Book > searchList) {
+public void setSearchList(List < DataBuku > searchList) {
     this.searchList = searchList;
 }
-public List < Book > getSearchByBookIdList() {
+public List < DataBuku > getSearchByBookIdList() {
     return searchBybookIdList;
 }
-public void setSearchByBookIdList(List < Book >
+public void setSearchByBookIdList(List < DataBuku >
     searchBybookIdList) {
     this.searchBybookIdList = searchBybookIdList;
 }
 public void onRowEdit(RowEditEvent event) {
-    FacesMessage msg = new FacesMessage(" Edited Record No", ((Book) event.getObject()).getBookId());
+    FacesMessage msg = new FacesMessage(" Edited Record No", ((DataBuku) event.getObject()).getIdBuku() + "");
     FacesContext.getCurrentInstance().addMessage(null, msg);
-    Book editedbook = (Book) event.getObject();
+    DataBuku editedbook = (DataBuku) event.getObject();
     bookDao.update(editedbook);
 }
 public void onCancel(RowEditEvent event) {
     FacesMessage msg = new FacesMessage("Edit Cancelled");
     FacesContext.getCurrentInstance().addMessage(null, msg);
-    booksList.remove((Book) event.getObject());
+    booksList.remove((DataBuku) event.getObject());
 }
 
 }
