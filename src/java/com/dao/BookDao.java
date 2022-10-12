@@ -43,7 +43,7 @@ public class BookDao {
     }
     public Integer getId(){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "select max(U.id_buku) from data_buku U";
+        String hql = "select max(U.idBuku) from DataBuku U";
         Query query = session.createQuery(hql);
         List<Integer> results = query.list();
         Integer userId = 1;

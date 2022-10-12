@@ -4,8 +4,10 @@ import com.dao.BookDao;
 import com.model.pojo.DataBuku;
 import com.util.HibernateUtil;
 import java.io.Serializable;
+import static java.lang.Integer.getInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -40,27 +42,18 @@ public List < DataBuku > getBooks() {
     int count = booksList.size();
     return booksList;
 }
-public String newBookID(int Id) {
-    String bookId = null;
-    if (Id <= 9) {
-        bookId = "B000" + Id;
-    } else if (Id <= 99) {
-        bookId = "B00" + Id;
-    } else if (Id <= 999) {
-        bookId = "B0" + Id;
-    } else {
-        bookId = "B" + Id;
-    }
+public int newBookID(int Id) {
+    int bookId = 0;
     return bookId;
 }
 public void addBook() {
-    String bookId = null;
+    int bookId = 0;
     Integer userId = 0;
     userId = bookDao.getId();
     newbook.setIdBuku(userId);
     Integer Id = newbook.getIdBuku();
     bookId = newBookID(Id);
-    newbook.setIdBuku(Integer.parseInt(bookId));
+    newbook.setIdBuku(bookId);
     bookDao.add(newbook);
     System.out.println("Book successfully saved.");
     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Save Information", "Book successfully saved.");
@@ -143,4 +136,18 @@ public void onCancel(RowEditEvent event) {
     booksList.remove((DataBuku) event.getObject());
 }
 
+
+public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
+        if (filterText.isEmpty()) {
+            return true;
+        }
+        int filterInt = getInteger(filterText);
+
+        DataBuku books = (DataBuku) value;
+        return books.getJudulBuku().toLowerCase().contains(filterText)
+                || books.getPenerbit().toLowerCase().contains(filterText)
+                || books.getPengarang().toLowerCase().contains(filterText)
+                || books.getKategori().toLowerCase().contains(filterText);
+    }
 }

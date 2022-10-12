@@ -11,24 +11,61 @@
         margin-left:8px;
     }
 </style>
-    <p:dialog id="bookDetail1" widgetVar="$bookDetail1" header="Add 
+     <p:dialog id="bookDetail1" widgetVar="$bookDetail1" header="Add 
 Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
       <h:form>
         <p:panelGrid columns="2">
-          <p:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus"  actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" />
+          <h:outputLabel for="judul" value="Judul Buku: *" />
+          <p:inputText id="judul" value="#{bookBean.newbook.judulBuku}" label="Book Title" placeholder="Book Title" />
+          <h:outputLabel for="penerbit" value="Penerbit" />
+          <p:inputText id="penerbit" label="Penerbit" value="#{bookBean.newbook.penerbit}" placeholder="Penerbit" />
+          <h:outputLabel for="pengarang" value="Pengarang" />
+          <p:inputText id="pengarang" label="Pengarang" value="#{bookBean.newbook.pengarang}" placeholder="Pengarang" />
+          <p:outputLabel for="tahun" value="Tahun Penerbit" />
+          <p:inputText id="tahun" value="#{bookBean.newbook.tahunPenerbit}" label="Tahun Penerbit:" required="true" requiredMessage="Please Enter Published Date!" placeholder="Published Date" >
+              <f:convertNumber integerOnly="true" type="number" />
+          </p:inputText>
+          <p:outputLabel for="kategori" value="Kategori" />
+          <p:inputText id="kategori" label="Price" value="#{bookBean.newbook.kategori}" placeholder="price" />
+          <p:outputLabel for="stock" value="Stock" />
+          <p:inputText id="stock" label="Price" value="#{bookBean.newbook.stok}" placeholder="price" />
+          <p:commandButton  value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" />
+          <p:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
+        </p:panelGrid>
+      </h:form>
+    </p:dialog>
+     <p:dialog id="bookDetail2" widgetVar="$bookDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+         
+        <p:panelGrid columns="2">
+          <h:outputLabel for="judul" value="Judul Buku: *" />
+          <p:inputText id="judul" value="#{bookBean.book.judulBuku}" label="Book Title" placeholder="Book Title" />
+          <h:outputLabel for="penerbit" value="Penerbit" />
+          <p:inputText id="penerbit" label="Penerbit" value="#{bookBean.book.penerbit}" placeholder="Penerbit" />
+          <h:outputLabel for="pengarang" value="Pengarang" />
+          <p:inputText id="pengarang" label="Pengarang" value="#{bookBean.book.pengarang}" placeholder="Pengarang" />
+          <p:outputLabel for="tahun" value="Tahun Penerbit" />
+          <p:inputText id="tahun" value="#{bookBean.book.tahunPenerbit}" label="Tahun Penerbit:" required="true" requiredMessage="Please Enter Published Date!" placeholder="Published Date" >
+              <f:convertNumber integerOnly="true" type="number" />
+          </p:inputText>
+          <p:outputLabel for="kategori" value="Kategori" />
+          <p:inputText id="kategori" label="Price" value="#{bookBean.book.kategori}" placeholder="price" />
+          <p:outputLabel for="stock" value="Stock" />
+          <p:inputText id="stock" label="Price" value="#{bookBean.book.stok}" placeholder="price" />
+         <p:commandButton value="Update" ajax="true" icon="ui-icon-disk"  actionListener="#{bookBean.UpdateBook(bookBean.book)}" oncomplete="handleComplete(xhr, status, args)" />
           <p:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
         </p:panelGrid>
       </h:form>
     </p:dialog>
      <div class="card">
-        <h5 class="mt-0">Default</h5>
         <p:tabView>
             <p:tab title="Header I">
 <h:form id="form1">
      <p:commandButton icon="ui-icon-plusthick" id="addUserBtn" value="Add Book" update=":bookDetail1" ajax="true" oncomplete="PF('$bookDetail1').show()" /> 
+      <p:inputText id="globalFilter" onkeyup="PF('bookTablevar').filter()" style="width:300px" placeholder="Search all fields using global function" />
     <p:growl id="msgs" showDetail="true"/>
  
-    <p:dataTable var="book" value="#{bookBean.books}" id="bookTable">
+    <p:dataTable var="book" value="#{bookBean.books}" paginator="true" rows="5" id="bookTable" widgetVar="bookTablevar" emptyMessage="No customers found with given criteria">
     <p:column headerText="Id">
         <h:outputText value="#{book.idBuku}" />
     </p:column>
@@ -54,7 +91,7 @@ Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false
         <h:outputText value="#{book.stok}" />
     </p:column>
 
-        <p:column headerText="Delete" style="text-align: 
+        <p:column headerText="Action" style="text-align: 
 center">
           <p:commandButton value="Delete" icon="ui-icon-trash" type="button" onclick="PF('confirmDialog').show()" />
           <p:confirmDialog message="Are you sure you want to 
@@ -62,6 +99,7 @@ delete this record?Record once deleted can not be retrieved." header="Deleting" 
             <p:commandButton value="Yes Sure" update="bookTable" action="#{bookBean.deleteBook(book)}" oncomplete="PF('confirmDialog').hide()" />
             <p:commandButton value="Not Yet" onclick="PF('confirmDialog').hide();" type="button" />
           </p:confirmDialog>
+            <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit  ..." ajax="true" actionListener="#{bookBean.changeBook(book)}" update=":bookDetail2" oncomplete="PF('$bookDetail2').show()" />
         </p:column>
  </p:dataTable> 
  
