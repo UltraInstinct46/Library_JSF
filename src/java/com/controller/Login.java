@@ -5,8 +5,19 @@
  */
 package com.controller;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
 
 /**
  *
@@ -14,10 +25,20 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean (name = "login_bean")
 @SessionScoped
-public class Login {
-
+@Entity
+public class Login implements Serializable {
+    @Id
+    private int idAdmin;
     private String username;
     private String password;
+
+    public int getIdAdmin() {
+        return idAdmin;
+    }
+    
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
+    }
  
     public String getUsername() {
         return username;
@@ -34,12 +55,39 @@ public class Login {
     public void setPassword(String password) {
         this.password = password;
     }
+ 
     public boolean checkuser(){
-        if(username.equals("admin") && password.equals("admin")){
-            return true;
-        }else{
-            return false;
+           try {
+               System.out.println("username" + username);
+               System.out.println("password" + password);
+            SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+            Session session=sessionFactory.openSession();
+            session.beginTransaction();
+            
+            Query query=session.createQuery("from Login where username=:username and password=:passowrd");
+            query.setString("username", username);
+            query.setString("password", password);
+            List list=query.list();
+            
+               System.out.println("list size"+ list.size());
+            if(list.size()==1) {
+                return true;
+            }  else{
+                return false;
+            }
+                   
+              
+            
+        } catch (Exception e) {
+            System.out.println(e);
         }
+           return true;
+
+//        if(username.equals("admin") && password.equals("admin")){
+//            return true;
+//        }else{
+//            return false;
+//        }
         
     }
     public Login() {
