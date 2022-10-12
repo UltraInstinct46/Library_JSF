@@ -12,6 +12,5 @@
     <mapping resource="com/model/pojo/DataAnggota.hbm.xml"/>
     <mapping resource="com/model/pojo/MultiuserLogin.hbm.xml"/>
     <mapping resource="com/model/pojo/Siswa.hbm.xml"/>
-    <mapping resource="com/model/pojo/Login.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
