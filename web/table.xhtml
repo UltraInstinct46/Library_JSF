@@ -1,17 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:b="http://bootsfaces.net/ui"
-    xmlns:p="http://primefaces.org/ui">
-  <h:head>
-    <title>Books Data</title>
-  </h:head>
-  <h:body>
-<style type="text/css">
-    .ui-row-editor .ui-row-editor-pencil {
-        margin-left:8px;
-    }
-</style>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>BootsFaces Basic Page</title>
+    </h:head>
+    <h:body>
      <p:dialog id="bookDetail2" widgetVar="$bookDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
       <h:form>
          
@@ -59,9 +56,6 @@ Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false
         </p:panelGrid>
       </h:form>
     </p:dialog>
-     <div class="card">
-        <p:tabView>
-            <p:tab title="Header I">
 <h:form>
     <b:commandButton value="Add" iconAwesome="add" ajax="true" oncomplete="PF('$bookDetail1').show()" id="addUserBtn"/>
     <b:dataTable value="#{bookBean.books}"
@@ -89,21 +83,5 @@ Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false
     
   </b:dataTable>
 </h:form>
-            </p:tab>
-            <p:tab title="Header II">
-                <p class="m-0">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                    illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                    odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-                </p>
-            </p:tab>
-            <p:tab title="Header III">
-                <p class="m-0">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-                    et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                </p>
-            </p:tab>
-        </p:tabView>
-    </div>
-  </h:body>
+    </h:body>
 </html>
