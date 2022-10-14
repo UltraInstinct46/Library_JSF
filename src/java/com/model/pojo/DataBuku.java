@@ -5,6 +5,7 @@ package com.model.pojo;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 public class DataBuku  implements java.io.Serializable {
 
 
+     @Id
      private Integer idBuku;
      private String judulBuku;
      private String penerbit;

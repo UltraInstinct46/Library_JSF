@@ -5,7 +5,11 @@
  */
 package com.dao;
 
+<<<<<<< HEAD
 import com.model.pojo.DataBuku;
+=======
+import com.model.pojo.DataPeminjambuku;
+>>>>>>> 766cedda6d9be3145d18aa744fb67420422654cf
 import com.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +18,95 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.hibernate.Query;
 import org.hibernate.Session;
+<<<<<<< HEAD
 /**
  *
  * @author Roger Simanjuntak
  */
 public class PeminjamDao {
  
+=======
+
+/**
+ *
+ * @author killua
+ */
+
+public class PeminjamDao {
+    private DataPeminjambuku peminjam;
+    private DataPeminjambuku newpeminjam;
+    private List<DataPeminjambuku> DaoAllPeminjams;
+    private List<DataPeminjambuku> DaoSearchPeminjamList;
+    
+    public List<DataPeminjambuku> AllPeminjams(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session.beginTransaction();
+            DaoAllPeminjams = session.createCriteria(DataPeminjambuku.class).list();
+            int count = DaoAllPeminjams.size();
+            FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return DaoAllPeminjams;
+    }
+    public Integer getId(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "select max(U.idBuku) from DataBuku U";
+        Query query = session.createQuery(hql);
+        List<Integer> results = query.list();
+        Integer userId = 1;
+        if(results.get(0)!= null){
+            userId = results.get(0)+1;
+        }
+        session.flush();
+        session.close();
+        return userId;
+    }
+    
+    public void add(DataPeminjambuku newpeminjam){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            String Id = Integer.toString(newpeminjam.getIdPeminjam());
+            session.beginTransaction();
+            session.merge(newpeminjam);
+            session.flush();
+            System.out.println("New user Saved, id : "+ newpeminjam.getIdPeminjam());
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void delete(DataPeminjambuku peminjam){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            String name = peminjam.getUsername();
+            session.beginTransaction();
+            session.delete(peminjam);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+    public void update(DataPeminjambuku peminjam){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+        session.beginTransaction();
+        session.update(peminjam);
+        session.flush();
+        session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+    }
+>>>>>>> 766cedda6d9be3145d18aa744fb67420422654cf
 }
