@@ -10,15 +10,15 @@
     </h:head>
     <h:body>
       <h:form>
-  <b:dataTable value="#{Databuku.BookBean}"
-           var="car"
+          <b:dataTable value="#{bookBean.books}"
+           var="book"
            caption="This is a BootsFaces example table. It shows a list of cars, but that's not what it's about. The cars are just a placeholder for your content.">
-    <b:dataTableColumn value="#{bookBean.newbook.judulBuku}" />
-    <b:dataTableColumn value="#{bookBean.newbook.penerbit}" />
-    <b:dataTableColumn value="#{bookBean.newbook.pengarang}" />
-    <b:dataTableColumn value="#{bookBean.newbook.tahunPenerbit}"  order="asc"/>
-    <b:dataTableColumn value="#{bookBean.newbook.kategori}" />
-    <b:dataTableColumn value="#{bookBean.newbook.stok}" label="Engine Power (hp)" />
+    <b:dataTableColumn value="#{book.idBuku}" />
+    <b:dataTableColumn value="#{book.judulBuku}" />
+    <b:dataTableColumn value="#{book.penerbit}" />
+    <b:dataTableColumn value="#{book.pengarang}"/>
+    <b:dataTableColumn value="#{book.tahunPenerbit}" />
+    <b:dataTableColumn value="#{book.stok}"/>
   </b:dataTable>
 </h:form>
     </h:body>

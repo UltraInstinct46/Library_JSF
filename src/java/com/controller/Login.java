@@ -27,19 +27,20 @@ import org.hibernate.cfg.Configuration;
 @SessionScoped
 @Entity
 public class Login implements Serializable {
+    
     @Id
-    private int idAdmin;
+    private int id;
     private String username;
     private String password;
 
-    public int getIdAdmin() {
-        return idAdmin;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
     
-    public void setIdAdmin(int idAdmin) {
-        this.idAdmin = idAdmin;
-    }
- 
     public String getUsername() {
         return username;
     }
@@ -55,41 +56,36 @@ public class Login implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
- 
+
     public boolean checkuser(){
-           try {
-               System.out.println("username" + username);
-               System.out.println("password" + password);
-            SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
-            Session session=sessionFactory.openSession();
+        
+        try {
+            
+            SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+            Session session= sessionFactory.openSession();
             session.beginTransaction();
             
-            Query query=session.createQuery("from Login where username=:username and password=:passowrd");
+            Query query=session.createQuery("from Login where username=:username and password=:password");
             query.setString("username", username);
             query.setString("password", password);
-            List list=query.list();
-            
-               System.out.println("list size"+ list.size());
-            if(list.size()==1) {
-                return true;
-            }  else{
+            List list= query.list();
+            String test = list.get(0).toString();
+            if (list.size()==1) {
+                    return true;
+            }else{
                 return false;
             }
-                   
-              
+            
+            
             
         } catch (Exception e) {
             System.out.println(e);
+            return false;
         }
-           return true;
-
-//        if(username.equals("admin") && password.equals("admin")){
-//            return true;
-//        }else{
-//            return false;
-//        }
         
     }
+    
+    
     public Login() {
     }
     
