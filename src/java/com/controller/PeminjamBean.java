@@ -65,7 +65,7 @@ public void changePeminjam(DataPeminjambuku peminjam) {
     this.peminjam = peminjam;
 }
 public void UpdatePeminjam(DataPeminjambuku peminjam) {
-    String Title = peminjam.getNamaPeminjam();
+    String Title = peminjam.getUsername();
     FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "Title", Title);
 
     RequestContext.getCurrentInstance().showMessageInDialog(message1);
@@ -77,19 +77,11 @@ public void UpdatePeminjam(DataPeminjambuku peminjam) {
     peminjam = new DataPeminjambuku();
 }
 public void deletePeminjam(DataPeminjambuku peminjam) {
-    String Title = peminjam.getNamaPeminjam();
+    String Title = peminjam.getUsername();
     FacesMessage message3 = new FacesMessage(FacesMessage.SEVERITY_INFO, "Delete Item", Title); 
     RequestContext.getCurrentInstance().showMessageInDialog(message3);
     peminjamDao.delete(peminjam);
     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Delete", "Record deleted successfully");
-
-    RequestContext.getCurrentInstance().showMessageInDialog(message);
-}
-public void searchbyPeminjamId() {
-    searchBypeminjamIdList =
-    peminjamDao.SearchByPeminjamId(peminjam.getIdPeminjam()+ "");
-    int count = searchBypeminjamIdList.size();
-    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Number of Record Selected:", Integer.toString(count));
 
     RequestContext.getCurrentInstance().showMessageInDialog(message);
 }
