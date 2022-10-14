@@ -5,11 +5,7 @@
  */
 package com.dao;
 
-<<<<<<< HEAD
-import com.model.pojo.DataBuku;
-=======
 import com.model.pojo.DataPeminjambuku;
->>>>>>> 766cedda6d9be3145d18aa744fb67420422654cf
 import com.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +14,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.hibernate.Query;
 import org.hibernate.Session;
-<<<<<<< HEAD
-/**
- *
- * @author Roger Simanjuntak
- */
-public class PeminjamDao {
- 
-=======
 
 /**
  *
@@ -108,5 +96,4 @@ public class PeminjamDao {
         }
         session.close();
     }
->>>>>>> 766cedda6d9be3145d18aa744fb67420422654cf
 }

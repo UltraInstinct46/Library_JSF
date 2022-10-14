@@ -33,7 +33,6 @@ public class BookBean implements Serializable {
 
     public BookBean() {
     }
-    private DataBuku selectedBook;
     private List< DataBuku> booksList;
     private List< DataBuku> searchList;
     private List< DataBuku> searchBybookIdList;
@@ -144,24 +143,6 @@ public class BookBean implements Serializable {
         this.searchBybookIdList = searchBybookIdList;
     }
 
-    public DataBuku getSelectedBook() {
-        return selectedBook;
-    }
-
-    public void setSelectedBook(DataBuku selectedBook) {
-        this.selectedBook = selectedBook;
-    }
-    
-       public void clearMultiViewState() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        String viewId = context.getViewRoot().getViewId();
-        PrimeFaces.current().multiViewState().clearAll(viewId, true, (clientId) -> {
-            showMessage(clientId);
-        });
-    }
-    private void showMessage(String clientId){
-        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,clientId + "multiview state has been cleared out", null));
-    }
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage(" Edited Record No", ((DataBuku) event.getObject()).getIdBuku() + "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
