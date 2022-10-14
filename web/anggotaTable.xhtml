@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+  <h:head>
+    <title>Books Data</title>
+  </h:head>
+  <h:body>
+    <style type="text/css">
+      .ui-row-editor .ui-row-editor-pencil {
+        margin-left: 8px;
+      }
+    </style>
+    <p:dialog id="anggotaDetail2" widgetVar="$anggotaDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2">
+          <b:inputText id="nim" value="#{anggotaBean.anggota.nim}" label="NIM" placeholder="NIM" />
+          <b:inputText id="username" value="#{anggotaBean.anggota.multiuserLogin.username}" label="Username" placeholder="Username" />
+          <b:inputText id="nama" label="Nama Anggota" value="#{anggotaBean.anggota.namaAnggota}" placeholder="Nama Anggota" />
+          <b:inputText id="kelas" label="Kelas" value="#{anggotaBean.anggota.kelas}" placeholder="Kelas" />
+          <b:inputText id="tempat" value="#{anggotaBean.anggota.tempatLahir}" label="Tempat Lahir" placeholder="Tempat Lahir" />
+          <b:inputText id="tanggal" label="Tanggal Lahir" value="#{anggotaBean.anggota.tanggalLahir}" placeholder="Tanggal Lahir" />
+          <p:calendar id="datePub" value="#{anggotaBean.anggota.tanggalLahir}" label="Tanggal Lahir:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Birth Date" /> 
+          <b:commandButton value="Update" ajax="true" icon="ui-icon-disk" actionListener="#{anggotaBean.UpdateAnggota(anggotaBean.anggota)}" oncomplete="PF('$anggotaDetail2').hide()" update="@(.anggotaEditable)" />
+          <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <p:dialog id="anggotaDetail1" widgetVar="$anggotaDetail1" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2" class="editClass">
+          <b:inputText id="nim" value="#{anggotaBean.newanggota.nim}" label="NIM" placeholder="NIM" />
+          <b:inputText id="username" value="#{anggotaBean.newanggota.multiuserLogin.username}" label="Username" placeholder="Username" />
+          <b:inputText id="nama" label="Nama Anggota" value="#{anggotaBean.newanggota.namaAnggota}" placeholder="Nama Anggota" />
+          <b:inputText id="kelas" label="Kelas" value="#{anggotaBean.newanggota.kelas}" placeholder="Kelas" />
+          <b:inputText id="tempat" value="#{anggotaBean.newanggota.tempatLahir}" label="Tempat Lahir" placeholder="Tempat Lahir" />
+          <b:inputText id="tanggal" label="Tanggal Lahir" value="#{anggotaBean.newanggota.tanggalLahir}" placeholder="Tanggal Lahir" />
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{anggotaBean.addAnggota()}" oncomplete="PF('$anggotaDetail1').hide()" update="@(.anggotaEditable)" />
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.anggotaEditable)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <div class="card">
+          <h:form>
+            <b:commandButton value="Add" icon="edit" ajax="true" oncomplete="PF('$anggotaDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
+            <b:dataTable value="#{anggotaBean.anggotas}" var="anggota" class="anggotaEditable">
+              <b:dataTableColumn value="#{anggota.idAnggota}" />
+              <b:dataTableColumn value="#{anggota.nim}" />
+              <b:dataTableColumn value="#{anggota.multiuserLogin.username}" />
+              <b:dataTableColumn value="#{anggota.namaAnggota}" />
+              <b:dataTableColumn value="#{anggota.kelas}" />    
+              <b:dataTableColumn value="#{anggota.tempatLahir}" />
+              <b:dataTableColumn value="#{anggota.tanggalLahir}" />
+              <b:dataTableColumn value="">
+                <p:commandButton value="Delete" icon="pi-trash" action="#{anggotaBean.deleteAnggota(anggota)}">
+                  <f:ajax execute="@this" render="@form" />
+                </p:commandButton>
+                <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit  ..." ajax="true" actionListener="#{anggotaBean.changeAnggota(anggota)}" update=":anggotaDetail2" oncomplete="PF('$anggotaDetail2').show()" />
+              </b:dataTableColumn>
+            </b:dataTable>
+          </h:form>
+    </div>
+  </h:body>
+</html>
