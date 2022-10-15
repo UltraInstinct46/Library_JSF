@@ -60,7 +60,7 @@
 
         <!--TABLE BUKU PINJAM PEMBUKA-->
         <h:form style="font-size: 15px" >
-            <b:dataTable value="#{bookBean.books}"
+            <b:dataTable value="#{bookBean.booksFiltered}"
                          var="Book">
                 <b:dataTableColumn  value="#{Book.idBuku}" label="Nomor Buku" />
                 <b:dataTableColumn value="#{Book.judulBuku}"  label="Judul Buku" class=""/>

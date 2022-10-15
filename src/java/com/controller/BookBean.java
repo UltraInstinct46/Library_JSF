@@ -54,7 +54,11 @@ public class BookBean implements Serializable {
         int count = booksList.size();
         return booksList;
     }
-
+    public List< DataBuku> getBooksFiltered() {
+        booksList = bookDao.BooksAvailable();
+        int count = booksList.size();
+        return booksList;
+    }
     public int newBookID(int Id) {
         int bookId = 0;
         return bookId;

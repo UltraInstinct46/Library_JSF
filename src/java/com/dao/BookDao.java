@@ -13,8 +13,10 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -32,6 +34,24 @@ public class BookDao {
         try{
             session.beginTransaction();
             DaoAllBooks = session.createCriteria(DataBuku.class).list();
+            int count = DaoAllBooks.size();
+            FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return DaoAllBooks;
+    }
+    public List<DataBuku> BooksAvailable(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session.beginTransaction();
+            Criteria criteria;
+            criteria = session.createCriteria(DataBuku.class);
+            criteria.add(Restrictions.gt("stok",0));
+            DaoAllBooks = criteria.list();
             int count = DaoAllBooks.size();
             FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
             session.getTransaction().commit();
