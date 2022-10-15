@@ -14,6 +14,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.primefaces.context.PrimeFacesContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
@@ -169,5 +171,23 @@ public class BookBean implements Serializable {
                 || books.getPengarang().toLowerCase().contains(filterText)
                 || books.getKategori().toLowerCase().contains(filterText);
     }
-
+    public void pinjam(int id){
+//        System.out.println("Hahah SUkses" + id);
+//                try {
+//            
+//            SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+//            Session session= sessionFactory.openSession();
+//            session.beginTransaction();
+//            
+//            Query query=session.createQuery("from Login where username=:username and password=:password");
+//            query.setString("username", username);
+//            query.setString("password", password);
+//            List list= query.list();
+//            String test = list.get(0).toString();
+//            
+//            
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+    }
 }

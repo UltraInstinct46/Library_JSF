@@ -63,9 +63,7 @@
                 <b:dataTableColumn value="#{Book.kategori}" label="Kategori" />
                 <b:dataTableColumn value="#{Book.stok}" label="Stock" />
                 <b:dataTableColumn label="Click">
-                    <b:commandButton style="font-size: 15px" class="btn-warning" value="Pinjam" icon="check" ajax="true" update="@(.editableCarTable) "
-                                     onclick="ajax:car.edit();
-                                             javascript:return false;" >
+                    <b:commandButton style="font-size: 15px" class="btn-warning" value="Pinjam" icon="check" ajax="true" update="@(.editableCarTable) " actionListener="#{bookBean.pinjam(Book.idBuku)}" onclick="ajax:car.edit(); javascript:return false;" >
                     </b:commandButton>
 
                 </b:dataTableColumn>
