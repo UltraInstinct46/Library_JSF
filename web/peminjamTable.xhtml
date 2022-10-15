@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+  <h:head>
+    <title>Books Data</title>
+  </h:head>
+  <h:body>
+    <style type="text/css">
+      .ui-row-editor .ui-row-editor-pencil {
+        margin-left: 8px;
+      }
+    </style>
+    <p:dialog id="peminjamDetail2" widgetVar="$peminjamDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2">
+          <b:inputText id="username" value="#{peminjamBean.peminjam.username}" label="Username" placeholder="Username" />
+          <b:inputText id="nama" label="ID Buku" value="#{peminjamBean.peminjam.idBuku}" placeholder="ID Buku" />
+          <b:inputText id="kelas" label="Status" value="#{peminjamBean.peminjam.status}" placeholder="Status" />
+          <p:calendar id="tglPinjam" value="#{peminjamBean.peminjam.tglPinjam}" label="Tanggal Pinjam:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pinjam" />
+          <p:calendar id="tglPengembalian" value="#{peminjamBean.peminjam.tglPengembalian}" label="Tanggal Pengembalian:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pengembalian" />
+          <b:commandButton value="Update" ajax="true" icon="ui-icon-disk" actionListener="#{peminjamBean.UpdatePeminjam(peminjamBean.peminjam)}" oncomplete="PF('$peminjamDetail2').hide()" update="@(.peminjamEditable)" />
+          <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <p:dialog id="peminjamDetail1" widgetVar="$peminjamDetail1" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2" class="editClass">
+          <b:inputText id="username" value="#{peminjamBean.newpeminjam.username}" label="Username" placeholder="Username" />
+          <b:inputText id="nama" label="ID Buku" value="#{peminjamBean.newpeminjam.idBuku}" placeholder="ID Buku" />
+          <b:inputText id="kelas" label="Status" value="#{peminjamBean.newpeminjam.status}" placeholder="Status" />
+          <p:calendar id="tglPinjam" value="#{peminjamBean.newpeminjam.tglPinjam}" label="Tanggal Pinjam:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pinjam" />
+          <p:calendar id="tglPengembalian" value="#{peminjamBean.newpeminjam.tglPengembalian}" label="Tanggal Pengembalian:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pengembalian" />
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{peminjamBean.addPeminjam()}" oncomplete="PF('$peminjamDetail1').hide()" update="@(.peminjamEditable)" />
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.peminjamEditable)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <div class="card">
+          <h:form>
+            <b:commandButton value="Add" icon="edit" ajax="true" oncomplete="PF('$peminjamDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
+            <b:dataTable value="#{peminjamBean.peminjams}" var="peminjam" class="peminjamEditable">
+              <b:dataTableColumn value="#{peminjam.idPeminjam}" />
+              <b:dataTableColumn value="#{peminjam.username}" />
+              <b:dataTableColumn value="#{peminjam.idBuku}" />
+              <b:dataTableColumn value="#{peminjam.status}" />
+              <b:dataTableColumn value="#{peminjam.tglPinjam}" />    
+              <b:dataTableColumn value="#{peminjam.tglPengembalian}" />
+              <b:dataTableColumn value="">
+                <p:commandButton value="Delete" icon="pi-trash" action="#{peminjamBean.deletePeminjam(peminjam)}">
+                  <f:ajax execute="@this" render="@form" />
+                </p:commandButton>
+                <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit" ajax="true" actionListener="#{peminjamBean.changePeminjam(peminjam)}"  oncomplete="PF('$peminjamDetail2').show()" update=":peminjamDetail2"/>
+              </b:dataTableColumn>
+            </b:dataTable>
+          </h:form>
+    </div>
+  </h:body>
+</html>

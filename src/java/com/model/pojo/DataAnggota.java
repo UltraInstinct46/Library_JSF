@@ -11,7 +11,7 @@ public class DataAnggota  implements java.io.Serializable {
 
 
      private Integer idAnggota;
-     private MultiuserLogin multiuserLogin;
+     private String username;
      private int nim;
      private String namaAnggota;
      private String kelas;
@@ -21,8 +21,8 @@ public class DataAnggota  implements java.io.Serializable {
     public DataAnggota() {
     }
 
-    public DataAnggota(MultiuserLogin multiuserLogin, int nim, String namaAnggota, String kelas, String tempatLahir, Date tanggalLahir) {
-       this.multiuserLogin = multiuserLogin;
+    public DataAnggota(String username, int nim, String namaAnggota, String kelas, String tempatLahir, Date tanggalLahir) {
+       this.username = username;
        this.nim = nim;
        this.namaAnggota = namaAnggota;
        this.kelas = kelas;
@@ -37,12 +37,12 @@ public class DataAnggota  implements java.io.Serializable {
     public void setIdAnggota(Integer idAnggota) {
         this.idAnggota = idAnggota;
     }
-    public MultiuserLogin getMultiuserLogin() {
-        return this.multiuserLogin;
+    public String getUsername() {
+        return this.username;
     }
     
-    public void setMultiuserLogin(MultiuserLogin multiuserLogin) {
-        this.multiuserLogin = multiuserLogin;
+    public void setUsername(String username) {
+        this.username = username;
     }
     public int getNim() {
         return this.nim;

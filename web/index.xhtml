@@ -57,8 +57,6 @@ Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false
                   <f:ajax execute="@this" render="@form" />
                 </p:commandButton>
                 <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit  ..." ajax="true" actionListener="#{bookBean.changeBook(book)}" update=":bookDetail2" oncomplete="PF('$bookDetail2').show()" />
-                <!--        <b:commandButton value="edit" icon="edit" ajax="true" update="@(.bookEditable)"
-                       onclick="ajax:book.edit(); javascript:return false;" ></b:commandButton>-->
               </b:dataTableColumn>
             </b:dataTable>
           </h:form>
