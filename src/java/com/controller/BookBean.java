@@ -2,16 +2,23 @@ package com.controller;
 
 import com.dao.BookDao;
 import com.model.pojo.DataBuku;
+import com.model.pojo.DataPeminjambuku;
+import com.model.pojo.MultiuserLogin;
 import com.util.HibernateUtil;
 import java.io.Serializable;
 import static java.lang.Integer.getInteger;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import net.bootsfaces.utils.FacesMessages;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +48,7 @@ public class BookBean implements Serializable {
     BookDao bookDao = new BookDao();
     DataBuku book = new DataBuku();
     DataBuku newbook = new DataBuku();
-
+    MultiuserLogin ms;
     public List< DataBuku> getBooks() {
         booksList = bookDao.AllBooks();
         int count = booksList.size();
@@ -171,23 +178,30 @@ public class BookBean implements Serializable {
                 || books.getPengarang().toLowerCase().contains(filterText)
                 || books.getKategori().toLowerCase().contains(filterText);
     }
-    public void pinjam(int id){
-//        System.out.println("Hahah SUkses" + id);
-//                try {
-//            
-//            SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
-//            Session session= sessionFactory.openSession();
-//            session.beginTransaction();
-//            
-//            Query query=session.createQuery("from Login where username=:username and password=:password");
-//            query.setString("username", username);
-//            query.setString("password", password);
-//            List list= query.list();
-//            String test = list.get(0).toString();
-//            
-//            
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+    public void pinjam(int id, String username){
+        DataPeminjambuku pinjam = new DataPeminjambuku();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            LocalDate current = LocalDate.now();
+            ZoneId systemTimeZone = ZoneId.systemDefault();
+            ZonedDateTime zoneDateTime = current.atStartOfDay(systemTimeZone);
+            Date date = Date.from(zoneDateTime.toInstant()); 
+            session.beginTransaction();
+            pinjam.setUsername(username);
+            pinjam.setIdBuku(id);
+            pinjam.setStatus("Belum Dikembalikan");
+            pinjam.setTglPinjam(date);  
+            session.merge(pinjam);
+            session.flush();
+            System.out.println("New user Saved, id : "+ pinjam.getIdBuku());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Save Information", "Buku Berhasil Dipinjam.");
+
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
     }
 }

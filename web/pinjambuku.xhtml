@@ -46,8 +46,15 @@
             </div>
         </nav>
         <!-- Akhir NavBar-->
-
-
+<!--Notif-->
+    <p:dialog id="pinjam" widgetVar="$pinjam" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2" class="editClass">
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" update="@(.bookEditable)" />
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.bookEditable)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
 
 
 
@@ -63,7 +70,7 @@
                 <b:dataTableColumn value="#{Book.kategori}" label="Kategori" />
                 <b:dataTableColumn value="#{Book.stok}" label="Stock" />
                 <b:dataTableColumn label="Click">
-                    <b:commandButton style="font-size: 15px" class="btn-warning" value="Pinjam" icon="check" ajax="true" update="@(.editableCarTable) " actionListener="#{bookBean.pinjam(Book.idBuku)}" onclick="ajax:car.edit(); javascript:return false;" >
+                    <b:commandButton style="font-size: 15px" class="btn-warning" value="Pinjam" icon="check" ajax="true" update="@(.editableCarTable) " actionListener="#{bookBean.pinjam(Book.idBuku, login_bean.username)}" onclick="ajax:car.edit(); javascript:return false;" oncomplete="PF('pinjam').show()">
                     </b:commandButton>
 
                 </b:dataTableColumn>

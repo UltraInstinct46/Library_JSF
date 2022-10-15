@@ -51,8 +51,8 @@
 
         <!--TABLE BUKU PINJAM PEMBUKA-->
         <h:form style="font-size: 15px" >
-            <b:dataTable value="#{peminjamBean.peminjams}"
-                         var="peminjam">
+            <b:dataTable value="#{peminjamBean.getBorrows(login_bean.username)}"
+                         var="peminjam" class="peminjamTable">
                 <b:dataTableColumn  value="#{peminjam.idPeminjam}" label="Nomor Anggota" />
                 <b:dataTableColumn value="#{peminjam.username}"  label="Username"/>
                 <b:dataTableColumn value="#{peminjam.idBuku}" label="Nomor Buku" />
@@ -61,9 +61,8 @@
                 <b:dataTableColumn value="#{peminjam.tglPengembalian}" label="Tanggal Pengembalian" />
            
                 <b:dataTableColumn label="Click">
-                    <b:commandButton  style="font-size: 15px" class="btn-danger" value="Kembalikan" icon="check" ajax="true" update="@(.editableCarTable) "
-                                     onclick="ajax:car.edit();
-                                             javascript:return false;" >
+                    <b:commandButton  style="font-size: 15px" class="btn-danger" value="Kembalikan" icon="check" ajax="true" update="@(.peminjamTable) " actionListener="#{peminjamBean.pengembalian(peminjam.idPeminjam, peminjam.idBuku)}" onclick="ajax:car.edit();javascript:return false;" >
+                   <f:ajax execute="@this" render="@form" />
                     </b:commandButton>
 
                 </b:dataTableColumn>
