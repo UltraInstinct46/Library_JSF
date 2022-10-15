@@ -1,5 +1,4 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
-<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>    
     <h:head>
         <title>Books Data</title>
@@ -111,68 +110,4 @@
         <!--TABLE AKHIR-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </h:body>
-=======
-  <h:head>
-    <title>Books Data</title>
-  </h:head>
-  <h:body>
-    <style type="text/css">
-      .ui-row-editor .ui-row-editor-pencil {
-        margin-left: 8px;
-      }
-    </style>
-    <p:dialog id="bookDetail2" widgetVar="$bookDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
-      <h:form>
-        <b:panelGrid columns="2">
-          <b:inputText id="judul" value="#{bookBean.book.judulBuku}" label="Book Title" placeholder="Book Title" />
-          <b:inputText id="penerbit" label="Penerbit" value="#{bookBean.book.penerbit}" placeholder="Penerbit" />
-          <b:inputText id="pengarang" label="Pengarang" value="#{bookBean.book.pengarang}" placeholder="Pengarang" />
-          <b:inputText id="tahun" value="#{bookBean.book.tahunPenerbit}" label="Tahun Penerbit:" required="true" requiredMessage="Please Enter Published Date!" placeholder="Published Date">
-            <f:convertNumber integerOnly="true" type="number" />
-          </b:inputText>
-          <b:inputText id="kategori" label="Price" value="#{bookBean.book.kategori}" placeholder="price" />
-          <b:inputText id="stock" label="Price" value="#{bookBean.book.stok}" placeholder="price" />
-          <b:commandButton value="Update" ajax="true" icon="ui-icon-disk" actionListener="#{bookBean.UpdateBook(bookBean.book)}" oncomplete="PF('$bookDetail2').hide()" update="@(.bookEditable)" />
-          <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
-        </b:panelGrid>
-      </h:form>
-    </p:dialog>
-    <p:dialog id="bookDetail1" widgetVar="$bookDetail1" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
-      <h:form>
-        <b:panelGrid columns="2" class="editClass">
-          <b:inputText id="judul" value="#{bookBean.newbook.judulBuku}" label="Book Title" placeholder="Book Title" />
-          <b:inputText id="penerbit" label="Penerbit" value="#{bookBean.newbook.penerbit}" placeholder="Penerbit" />
-          <b:inputText id="pengarang" label="Pengarang" value="#{bookBean.newbook.pengarang}" placeholder="Pengarang" />
-          <b:inputText id="tahun" value="#{bookBean.newbook.tahunPenerbit}" label="Tahun Penerbit:" required="true" requiredMessage="Please Enter Published Date!" placeholder="Published Date">
-            <f:convertNumber integerOnly="true" type="number" />
-          </b:inputText>
-          <b:inputText id="kategori" label="Price" value="#{bookBean.newbook.kategori}" placeholder="price" />
-          <b:inputText id="stock" label="Price" value="#{bookBean.newbook.stok}" placeholder="price" />
-          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" update="@(.bookEditable)" />
-          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.bookEditable)" />
-        </b:panelGrid>
-      </h:form>
-    </p:dialog>
-    <div class="card">
-          <h:form>
-            <b:commandButton value="Add" icon="edit" ajax="true" oncomplete="PF('$bookDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
-            <b:dataTable value="#{bookBean.books}" var="book"  class="bookEditable">
-              <b:dataTableColumn value="#{book.idBuku}" />
-              <b:dataTableColumn value="#{book.judulBuku}" />
-              <b:dataTableColumn value="#{book.penerbit}" />
-              <b:dataTableColumn value="#{book.pengarang}" />
-              <b:dataTableColumn value="#{book.tahunPenerbit}" />
-              <b:dataTableColumn value="#{book.kategori}" />
-              <b:dataTableColumn value="#{book.stok}" />
-              <b:dataTableColumn value="" label="Action">
-                <p:commandButton value="Delete" icon="pi-trash" action="#{bookBean.deleteBook(book)}">
-                  <f:ajax execute="@this" render="@form" />
-                </p:commandButton>
-                <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit  ..." ajax="true" actionListener="#{bookBean.changeBook(book)}" update=":bookDetail2" oncomplete="PF('$bookDetail2').show()" />
-              </b:dataTableColumn>
-            </b:dataTable>
-          </h:form>
-    </div>
-  </h:body>
->>>>>>> 3c386451e25454587014dc757f9c9f4551236347
 </html>
