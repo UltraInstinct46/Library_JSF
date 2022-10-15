@@ -6,52 +6,55 @@
     <h:head>
     </h:head>
     <!-- Compiled and minified CSS -->
+    <link type="text/css" rel="stylesheet" 
+		  href="css/login.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script  type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script  type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-       
-        <h:body style="background-image: url(images/background.jpg);background-size: cover">
-            <div class="valign-wrapper" id="login-page">
-                <div class="container">
-                    <div class="center-align mt-5" style="margin-top: 50px">
-                        <div class="col s6 offset-s3">
-                            <div class="card">
-                                <div class="card-content">
-                                    <img class="resposive-img" style="max-width: 250px;" src="images/logo.png"/>
-                                        <div class="left-align">
-                                            <h:form id="login-form">
-                                                <p:growl autoUpdate="true"/>
-                                                <div class="row">
-                                                    <div class=" col s12 input-field">
-                                                        <h:inputText id="username" required="true" requiredMessage="Id need You " value="#{login_bean.username}"/>
-                                                        <h:outputLabel for="username" value="Username"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class=" col s12 input-field">
-                                                        <h:inputSecret id="password" value="#{login_bean.password}" required="true" requiredMessage="Password need You "/>
-                                                        <h:outputLabel for="password" value="Password"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class=" col s12 input-field center-align">
-                                                        <h:commandLink value="Masuk!" styleClass="ui-button-success btn-large" style="background-color: green" action="#{login_bean.checkuser()}"/>
-                                                    </div>
-                                                </div>
-                                            </h:form>
+    <h:body style="background-image: url(images/background.jpg);background-size: cover">
+        <div class="valign-wrapper" id="login-page">
+            <div class="container">
+                <div class="center-align mt-5" style="margin-top: 50px">
+                    <div class="col s6 offset-s3">
+                        <div class="card">
+                            <div class="card-content">
+                                <img class="resposive-img" style="max-width: 250px;" src="images/logo.png"/>
+                                <div class="left-align">
+                                    <h:form id="login-form">
+                                        <p:growl autoUpdate="true"/>
+                                        <div class="row">
+                                            <div class=" col s12 input-field">
+                                                <h:inputText id="username" required="true" requiredMessage="Id need You " value="#{login_bean.username}"/>
+                                                <h:outputLabel for="username" value="Username"/>
+                                            </div>
                                         </div>
+                                        <div class="row">
+                                            <div class=" col s12 input-field">
+                                                <h:inputSecret id="password" value="#{login_bean.password}" required="true" requiredMessage="Password need You "/>
+                                                <h:outputLabel for="password" value="Password"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class=" col s12 input-field center-align ">
+                                                <h:commandLink value="Masuk!" styleClass=" btn-large" style="background-color: #00fa9a" id="btn-font"  action="#{login_bean.checkuser()}"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>      
-            <script>
-                $(document).on("ready",function(){
+            </div>
+        </div>      
+        <script>
+            $(document).on("ready", function () {
                 $('#login-page').css({'height': window.innerHeight + 'px'});
             });
-            </script>   
-        </h:body>
+        </script> 
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </h:body>
 </html>

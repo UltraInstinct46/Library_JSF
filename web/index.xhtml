@@ -52,7 +52,7 @@ Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false
               <b:dataTableColumn value="#{book.tahunPenerbit}" />
               <b:dataTableColumn value="#{book.kategori}" />
               <b:dataTableColumn value="#{book.stok}" />
-              <b:dataTableColumn value="">
+              <b:dataTableColumn value="" label="Action">
                 <p:commandButton value="Delete" icon="pi-trash" action="#{bookBean.deleteBook(book)}">
                   <f:ajax execute="@this" render="@form" />
                 </p:commandButton>

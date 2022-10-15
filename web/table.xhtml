@@ -11,6 +11,17 @@
     <h:body>
      <p:dialog id="bookDetail2" widgetVar="$bookDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
       <h:form>
+
+          <b:dataTable value="#{bookBean.books}"
+           var="book"
+           caption="This is a BootsFaces example table. It shows a list of cars, but that's not what it's about. The cars are just a placeholder for your content.">
+    <b:dataTableColumn value="#{book.idBuku}" />
+    <b:dataTableColumn value="#{book.judulBuku}" />
+    <b:dataTableColumn value="#{book.penerbit}" />
+    <b:dataTableColumn value="#{book.pengarang}"/>
+    <b:dataTableColumn value="#{book.tahunPenerbit}" />
+    <b:dataTableColumn value="#{book.stok}"/>
+
          
         <p:panelGrid columns="2">
           <h:outputLabel for="judul" value="Judul Buku: *" />
@@ -81,6 +92,7 @@ Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false
       </b:commandButton>-->
     </b:dataTableColumn>
     
+
   </b:dataTable>
 </h:form>
     </h:body>

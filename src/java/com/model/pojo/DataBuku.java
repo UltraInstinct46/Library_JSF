@@ -104,6 +104,28 @@ public class DataBuku  implements java.io.Serializable {
     public void setDataPeminjambukus(Set<DataPeminjambuku> dataPeminjambukus) {
         this.dataPeminjambukus = dataPeminjambukus;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (this.idBuku != null ? this.idBuku.hashCode() : 0);
+        return hash;
+    }
+ 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DataBuku other = (DataBuku) obj;
+        if ((this.idBuku == null) ? (other.idBuku != null) : !this.idBuku.equals(other.idBuku)) {
+            return false;
+        }
+        return true;
+    }
 
 
 
