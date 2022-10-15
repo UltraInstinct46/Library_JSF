@@ -14,6 +14,9 @@
         <property name="loginType" type="string">
             <column name="login_type" length="50" not-null="true" />
         </property>
+        <property name="idLogin" type="int">
+            <column name="id_login" not-null="true" unique="true" />
+        </property>
         <set name="dataAnggotas" table="data_anggota" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="username" length="50" not-null="true" />

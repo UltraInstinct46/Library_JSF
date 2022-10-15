@@ -18,17 +18,27 @@ public class MultiuserLogin  implements java.io.Serializable {
      private String loginType;
      private Set<DataAnggota> dataAnggotas = new HashSet<DataAnggota>(0);
      private Set<DataPetugas> dataPetugases = new HashSet<DataPetugas>(0);
+     private int idLogin;
 
+    public int getIdLogin() {
+        return idLogin;
+    }
+
+    public void setIdLogin(int idLogin) {
+        this.idLogin = idLogin;
+    }
     public MultiuserLogin() {
     }
 
 	
-    public MultiuserLogin(String username, String password, String loginType) {
+    public MultiuserLogin(int idLogin, String username, String password, String loginType) {
+        this.idLogin = idLogin;
         this.username = username;
         this.password = password;
         this.loginType = loginType;
     }
-    public MultiuserLogin(String username, String password, String loginType, Set<DataAnggota> dataAnggotas, Set<DataPetugas> dataPetugases) {
+    public MultiuserLogin(int idLogin,String username, String password, String loginType, Set<DataAnggota> dataAnggotas, Set<DataPetugas> dataPetugases) {
+       this.idLogin = idLogin;
        this.username = username;
        this.password = password;
        this.loginType = loginType;
