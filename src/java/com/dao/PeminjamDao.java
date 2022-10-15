@@ -12,8 +12,10 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -30,7 +32,28 @@ public class PeminjamDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
             session.beginTransaction();
-            DaoAllPeminjams = session.createCriteria(DataPeminjambuku.class).list();
+            Criteria criteria;
+            criteria = session.createCriteria(DataPeminjambuku.class);
+            DaoAllPeminjams = criteria.list();
+            int count = DaoAllPeminjams.size();
+            FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.close();
+        return DaoAllPeminjams;
+    }
+        public List<DataPeminjambuku> Peminjam(String username){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session.beginTransaction();
+            Criteria criteria;
+            criteria = session.createCriteria(DataPeminjambuku.class);
+            criteria.add(Restrictions.eq("status","Belum Dikembalikan"));
+            criteria.add(Restrictions.eq("username",username));
+            DaoAllPeminjams = criteria.list();
             int count = DaoAllPeminjams.size();
             FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
             session.getTransaction().commit();

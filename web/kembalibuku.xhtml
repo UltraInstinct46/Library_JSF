@@ -34,7 +34,7 @@
                             <a class="nav-link pe-5" aria-current="page" href="pinjambuku.xhtml" >Peminjaman Buku</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active pe-auto" href="kembalibuku.xhtml">Pengembalian Buku</a>
+                            <a class="nav-link active pe-auto" href="kembalibuku.xhtml">#{login_bean.username}</a>
                         </li>
                       
                         <li class="nav-item ms-5" style="padding-left: 380px">
@@ -51,8 +51,8 @@
 
         <!--TABLE BUKU PINJAM PEMBUKA-->
         <h:form style="font-size: 15px" >
-            <b:dataTable value="#{peminjamBean.peminjams}"
-                         var="peminjam">
+            <b:dataTable value="#{peminjamBean.getBorrows(login_bean.username)}"
+                         var="peminjam" class="peminjamTable">
                 <b:dataTableColumn  value="#{peminjam.idPeminjam}" label="Nomor Anggota" />
                 <b:dataTableColumn value="#{peminjam.username}"  label="Username"/>
                 <b:dataTableColumn value="#{peminjam.idBuku}" label="Nomor Buku" />
@@ -61,9 +61,8 @@
                 <b:dataTableColumn value="#{peminjam.tglPengembalian}" label="Tanggal Pengembalian" />
            
                 <b:dataTableColumn label="Click">
-                    <b:commandButton  style="font-size: 15px" class="btn-danger" value="Kembalikan" icon="check" ajax="true" update="@(.editableCarTable) "
-                                     onclick="ajax:car.edit();
-                                             javascript:return false;" >
+                    <b:commandButton  style="font-size: 15px" class="btn-danger" value="Kembalikan" icon="check" ajax="true" update="@(.peminjamTable) " actionListener="#{peminjamBean.pengembalian(peminjam.idPeminjam, peminjam.idBuku)}" onclick="ajax:car.edit();javascript:return false;" >
+                   <f:ajax execute="@this" render="@form" />
                     </b:commandButton>
 
                 </b:dataTableColumn>

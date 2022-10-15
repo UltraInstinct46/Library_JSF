@@ -6,6 +6,7 @@
 package com.dao;
 
 import com.model.pojo.DataBuku;
+import com.model.pojo.DataPeminjambuku;
 import com.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
