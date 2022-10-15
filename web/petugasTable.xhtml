@@ -1,5 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
-  <h:head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>
+      
+    <h:head>
     <title>Books Data</title>
   </h:head>
   <h:body>
@@ -8,6 +10,43 @@
         margin-left: 8px;
       }
     </style>
+    <link type="text/css" rel="stylesheet" 
+		  href="css/navbar.css" />
+    <!-- Awal NavBar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-0" >
+            <div class="container">
+                <a class="navbar-brand" style="margin-left: -180px" href="petugasTable.xhtml" >
+                    WELCOME TO ADMIN PAGE
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 200px">
+
+                    <ul class="navbar-nav ms-auto" style="font-size: 15px">
+                        <li class="nav-item" style="padding-left: 50px" >
+                            <a class="nav-link " aria-current="page" href="index.xhtml" >Data Buku</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active " href="petugasTable.xhtml">Data Petugas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="peminjamTable.xhtml">Data Peminjam</a>
+                        </li>
+                        <li class="nav-item" style="padding-right:200px">
+                            <a class="nav-link " href="anggotaTable.xhtml">Data Anggota</a>
+                        </li>
+                        <li class="nav-item text-left " style="margin-right: -100px">
+                            <a class="nav-link" href="login.xhtml">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Akhir NavBar-->
+        
+        
     <p:dialog id="petugasDetail2" widgetVar="$petugasDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
       <h:form>
         <b:panelGrid columns="2">
@@ -34,21 +73,22 @@
     </p:dialog>
     <div class="card">
           <h:form>
-            <b:commandButton value="Add" icon="edit" ajax="true" oncomplete="PF('$petugasDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
+              <b:commandButton styleClass="btn-success text-dark" value="Add" icon="edit" ajax="true" oncomplete="PF('$petugasDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
             <b:dataTable value="#{petugasBean.petugass}" var="petugas" class="petugasEditable">
-              <b:dataTableColumn value="#{petugas.idPetugas}" />
-              <b:dataTableColumn value="#{petugas.username}" />
-              <b:dataTableColumn value="#{petugas.namaPetugas}" />
+                <b:dataTableColumn value="#{petugas.idPetugas}" label="Nomor Petugas" />
+              <b:dataTableColumn value="#{petugas.username}" label="Username" />
+              <b:dataTableColumn value="#{petugas.namaPetugas}" label="Nama Petugas" />
               <b:dataTableColumn value="#{petugas.alamat}" />
-              <b:dataTableColumn value="#{petugas.noTelp}" />    
-              <b:dataTableColumn value="">
-                <p:commandButton value="Delete" icon="pi-trash" action="#{petugasBean.deletePetugas(petugas)}">
+              <b:dataTableColumn value="#{petugas.noTelp}"  label="Nomor Telepon"/>    
+              <b:dataTableColumn value="" label="Action">
+                  <p:commandButton styleClass="btn-danger text-dark" value="Delete" icon="pi-trash" action="#{petugasBean.deletePetugas(petugas)}">
                   <f:ajax execute="@this" render="@form" />
                 </p:commandButton>
-                <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit" ajax="true" actionListener="#{petugasBean.changePetugas(petugas)}" update=":petugasDetail2" oncomplete="PF('$petugasDetail2').show()" />
+                <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat text-dark btn-warning" icon="ui-icon-pencil" id="editUserBtn" value="Edit" ajax="true" actionListener="#{petugasBean.changePetugas(petugas)}" update=":petugasDetail2" oncomplete="PF('$petugasDetail2').show()" />
               </b:dataTableColumn>
             </b:dataTable>
           </h:form>
     </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </h:body>
 </html>
