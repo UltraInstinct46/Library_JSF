@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+  <h:head>
+    <title>Books Data</title>
+  </h:head>
+  <h:body>
+    <style type="text/css">
+      .ui-row-editor .ui-row-editor-pencil {
+        margin-left: 8px;
+      }
+    </style>
+    <p:dialog id="petugasDetail2" widgetVar="$petugasDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2">
+          <b:inputText id="username" value="#{petugasBean.petugas.username}" label="Username" placeholder="Username" />
+          <b:inputText id="name" value="#{petugasBean.petugas.namaPetugas}" label="Nama Petugas" placeholder="Nama Petugas" />
+          <b:inputText id="alamat" label="Alamat" value="#{petugasBean.petugas.alamat}" placeholder="Alamat" />
+          <b:inputText id="no" label="No Telpon" value="#{petugasBean.petugas.noTelp}" placeholder="No Telpon" />
+          <b:commandButton value="Update" ajax="true" icon="ui-icon-disk" actionListener="#{petugasBean.UpdatePetugas(petugasBean.petugas)}" oncomplete="PF('$petugasDetail2').hide()" update="@(.petugasEditable)" />
+          <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <p:dialog id="petugasDetail1" widgetVar="$petugasDetail1" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2" class="editClass">
+          <b:inputText id="username" value="#{petugasBean.newpetugas.username}" label="Username" placeholder="Username" />
+          <b:inputText id="name" value="#{petugasBean.newpetugas.namaPetugas}" label="Nama Petugas" placeholder="Nama Petugas" />
+          <b:inputText id="alamat" label="Alamat" value="#{petugasBean.newpetugas.alamat}" placeholder="Alamat" />
+          <b:inputText id="no" label="No Telpon" value="#{petugasBean.newpetugas.noTelp}" placeholder="No Telpon" />
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{petugasBean.addPetugas()}" oncomplete="PF('$petugasDetail1').hide()" update="@(.petugasEditable)" />
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.petugasEditable)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <div class="card">
+          <h:form>
+            <b:commandButton value="Add" icon="edit" ajax="true" oncomplete="PF('$petugasDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
+            <b:dataTable value="#{petugasBean.petugass}" var="petugas" class="petugasEditable">
+              <b:dataTableColumn value="#{petugas.idPetugas}" />
+              <b:dataTableColumn value="#{petugas.username}" />
+              <b:dataTableColumn value="#{petugas.namaPetugas}" />
+              <b:dataTableColumn value="#{petugas.alamat}" />
+              <b:dataTableColumn value="#{petugas.noTelp}" />    
+              <b:dataTableColumn value="">
+                <p:commandButton value="Delete" icon="pi-trash" action="#{petugasBean.deletePetugas(petugas)}">
+                  <f:ajax execute="@this" render="@form" />
+                </p:commandButton>
+                <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit" ajax="true" actionListener="#{petugasBean.changePetugas(petugas)}" update=":petugasDetail2" oncomplete="PF('$petugasDetail2').show()" />
+              </b:dataTableColumn>
+            </b:dataTable>
+          </h:form>
+    </div>
+  </h:body>
+</html>
