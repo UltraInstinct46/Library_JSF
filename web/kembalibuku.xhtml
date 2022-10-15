@@ -51,15 +51,15 @@
 
         <!--TABLE BUKU PINJAM PEMBUKA-->
         <h:form style="font-size: 15px" >
-            <b:dataTable value="#{bookBean.books}"
-                         var="Book">
-                <b:dataTableColumn  value="#{Book.idBuku}" label="Nomor Buku" />
-                <b:dataTableColumn value="#{Book.judulBuku}"  label="Judul Buku"/>
-                <b:dataTableColumn value="#{Book.penerbit}" label="Penerbit" />
-                <b:dataTableColumn value="#{Book.pengarang}" label="Pengarang"  />
-                <b:dataTableColumn value="#{Book.tahunPenerbit}" label="Tahun Terbit" />
-                <b:dataTableColumn value="#{Book.kategori}" label="Kategori" />
-                <b:dataTableColumn value="#{Book.stok}" label="Stock" />
+            <b:dataTable value="#{peminjamBean.peminjams}"
+                         var="peminjam">
+                <b:dataTableColumn  value="#{peminjam.idPeminjam}" label="Nomor Anggota" />
+                <b:dataTableColumn value="#{peminjam.username}"  label="Username"/>
+                <b:dataTableColumn value="#{peminjam.idBuku}" label="Nomor Buku" />
+                <b:dataTableColumn value="#{peminjam.status}" label="Status"  />
+                <b:dataTableColumn value="#{peminjam.tglPinjam}" label="Tanggal Pinjam" />
+                <b:dataTableColumn value="#{peminjam.tglPengembalian}" label="Tanggal Pengembalian" />
+           
                 <b:dataTableColumn label="Click">
                     <b:commandButton  style="font-size: 15px" class="btn-danger" value="Kembalikan" icon="check" ajax="true" update="@(.editableCarTable) "
                                      onclick="ajax:car.edit();
