@@ -1,0 +1,61 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 15, 2022, 9:43:34 PM
+    Author     : Roger Simanjuntak
+*/
+.button__round {
+    border-radius: 2rem;
+}
+.btn-custom {
+    padding-inline: 3em;
+    color: white;
+    background-color:#6366F1;
+    border-radius: 40px;
+    border: 2px solid #6366F1;
+    transition: all 0.3s ease 0s;
+}
+.btn-custom:hover {
+    color: #6366F1;
+    border: 2px solid #6366F1;
+    background: transparent;
+}
+.btn-custom:active {
+    padding-inline: 3em;
+    color: white;
+    background-color:#6366F1;
+    border-radius: 40px;
+    border: 2px solid #6366F1;
+}
+
+.btn-custom-outlined {
+    /* background-color: #6366F1;
+    color: white;
+    border-radius: 40px; */
+    padding-inline: 3em;
+    color: #6366F1;
+    border: 2px solid #6366F1;
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+}
+.btn-custom-outlined:hover {
+    color: white;
+    background-color:#6366F1;
+}
+
+.card-custom {
+    border-radius: 15px !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-custom:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-img-top {
+    height: 10em;
+    overflow: hidden; box-sizing: border-box; object-fit: cover;
+    color: black;
+}

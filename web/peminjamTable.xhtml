@@ -56,7 +56,7 @@
                     <b:inputText id="nama" label="ID Buku" value="#{peminjamBean.peminjam.idBuku}" placeholder="ID Buku" />
                     <b:inputText id="kelas" label="Status" value="#{peminjamBean.peminjam.status}" placeholder="Status" />
                     <p:calendar id="tglPinjam" value="#{peminjamBean.peminjam.tglPinjam}" label="Tanggal Pinjam:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pinjam" />
-                    <p:calendar id="tglPengembalian" value="#{peminjamBean.peminjam.tglPengembalian}" label="Tanggal Pengembalian:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pengembalian" />
+                    <p:calendar id="tglPengembalian" value="#{peminjamBean.peminjam.tglPengembalian}" label="Tanggal Pengembalian:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pengembalian" />
                     <b:commandButton value="Update" ajax="true" icon="ui-icon-disk" actionListener="#{peminjamBean.UpdatePeminjam(peminjamBean.peminjam)}" oncomplete="PF('$peminjamDetail2').hide()" update="@(.peminjamEditable)" />
                     <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
                 </b:panelGrid>
@@ -68,8 +68,8 @@
                     <b:inputText id="username" value="#{peminjamBean.newpeminjam.username}" label="Username" placeholder="Username" />
                     <b:inputText id="nama" label="ID Buku" value="#{peminjamBean.newpeminjam.idBuku}" placeholder="ID Buku" />
                     <b:inputText id="kelas" label="Status" value="#{peminjamBean.newpeminjam.status}" placeholder="Status" />
-                    <p:calendar id="tglPinjam" value="#{peminjamBean.newpeminjam.tglPinjam}" label="Tanggal Pinjam:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pinjam" />
-                    <p:calendar id="tglPengembalian" value="#{peminjamBean.newpeminjam.tglPengembalian}" label="Tanggal Pengembalian:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Birth Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pengembalian" />
+                    <p:calendar id="tglPinjam" value="#{peminjamBean.newpeminjam.tglPinjam}" label="Tanggal Pinjam:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pinjam" />
+                    <p:calendar id="tglPengembalian" value="#{peminjamBean.newpeminjam.tglPengembalian}" label="Tanggal Pengembalian:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Date!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Tanggal Pengembalian" />
                     <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{peminjamBean.addPeminjam()}" oncomplete="PF('$peminjamDetail1').hide()" update="@(.peminjamEditable)" />
                     <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.peminjamEditable)" />
                 </b:panelGrid>
