@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2022 at 02:11 AM
+-- Generation Time: Oct 15, 2022 at 01:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.0
 
@@ -76,7 +76,7 @@ CREATE TABLE `data_buku` (
 
 INSERT INTO `data_buku` (`id_buku`, `judul_buku`, `penerbit`, `pengarang`, `tahun_penerbit`, `kategori`, `stok`) VALUES
 (39, 'chihaya', 'chihaya', 'test', 2001, 'chihaya', 1),
-(44, 'test', 'test', 'test', 0000, 'test', 0);
+(44, 'test', 'test', 'test', 0000, 'test', 5);
 
 -- --------------------------------------------------------
 
@@ -92,6 +92,29 @@ CREATE TABLE `data_peminjambuku` (
   `tgl_pinjam` date NOT NULL,
   `tgl_pengembalian` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_peminjambuku`
+--
+
+INSERT INTO `data_peminjambuku` (`id_peminjam`, `username`, `id_buku`, `status`, `tgl_pinjam`, `tgl_pengembalian`) VALUES
+(46, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(47, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(48, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(49, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(50, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(51, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(52, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(53, 'admin1', 44, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(54, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(55, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(56, 'admin1', 39, 'Belum Dikembalikan', '2022-10-15', NULL),
+(57, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(58, 'admin1', 44, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(59, 'adhisti', 39, 'Belum Dikembalikan', '2022-10-15', NULL),
+(60, 'admin1', 44, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(61, 'admin1', 44, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15'),
+(62, 'admin1', 39, 'Sudah Dikembalikan', '2022-10-15', '2022-10-15');
 
 --
 -- Triggers `data_peminjambuku`
@@ -139,6 +162,7 @@ INSERT INTO `data_petugas` (`id_petugas`, `username`, `nama_petugas`, `alamat`, 
 --
 
 CREATE TABLE `multiuser_login` (
+  `id_login` int(8) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `login_type` varchar(50) NOT NULL
@@ -148,54 +172,13 @@ CREATE TABLE `multiuser_login` (
 -- Dumping data for table `multiuser_login`
 --
 
-INSERT INTO `multiuser_login` (`username`, `password`, `login_type`) VALUES
-('adhisti', '2101', 'Mahasiswa'),
-('admin1', '123', 'Admin'),
-('admin2', '4356', 'Admin'),
-('admin3', '9090', 'Admin'),
-('fahmi', '2103', 'Mahasiswa'),
-('restu', '123', 'Mahasiswa');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `siswa`
---
-
-CREATE TABLE `siswa` (
-  `id_siswa` int(11) NOT NULL,
-  `id_ujian` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `siswa`
---
-
-INSERT INTO `siswa` (`id_siswa`, `id_ujian`) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ujian`
---
-
-CREATE TABLE `ujian` (
-  `id_ujian` int(11) NOT NULL,
-  `harga` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ujian`
---
-
-INSERT INTO `ujian` (`id_ujian`, `harga`) VALUES
-(1, 20000),
-(2, 35000),
-(3, 50000);
+INSERT INTO `multiuser_login` (`id_login`, `username`, `password`, `login_type`) VALUES
+(1, 'adhisti', '2101', 'Mahasiswa'),
+(2, 'admin1', '123', 'Admin'),
+(3, 'admin2', '4356', 'Admin'),
+(4, 'admin3', '9090', 'Admin'),
+(5, 'fahmi', '2103', 'Mahasiswa'),
+(6, 'restu', '123', 'Mahasiswa');
 
 --
 -- Indexes for dumped tables
@@ -233,13 +216,8 @@ ALTER TABLE `data_petugas`
 -- Indexes for table `multiuser_login`
 --
 ALTER TABLE `multiuser_login`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `siswa`
---
-ALTER TABLE `siswa`
-  ADD PRIMARY KEY (`id_siswa`);
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `id_login` (`id_login`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -255,19 +233,25 @@ ALTER TABLE `data_anggota`
 -- AUTO_INCREMENT for table `data_buku`
 --
 ALTER TABLE `data_buku`
-  MODIFY `id_buku` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_buku` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `data_peminjambuku`
 --
 ALTER TABLE `data_peminjambuku`
-  MODIFY `id_peminjam` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_peminjam` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `data_petugas`
 --
 ALTER TABLE `data_petugas`
   MODIFY `id_petugas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `multiuser_login`
+--
+ALTER TABLE `multiuser_login`
+  MODIFY `id_login` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
