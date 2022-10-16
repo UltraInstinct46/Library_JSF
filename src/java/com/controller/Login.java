@@ -84,7 +84,7 @@ public class Login implements Serializable {
                 if(roles.equals("Admin")){
                     ec.redirect("index.xhtml");
                 }else{
-                    ec.redirect("pinjambuku.xhtml");
+                    ec.redirect("catalogBuku.xhtml");
                 }
             }
             // commit transaction

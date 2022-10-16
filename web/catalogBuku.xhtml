@@ -1,0 +1,120 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>
+    <link type="text/css" rel="stylesheet" 
+          href="css/custom.css" />
+    <link type="text/css" rel="stylesheet" 
+              href="css/navbar.css" />  
+    <link type="text/css" rel="stylesheet" 
+          href="css/compontent.min.css.css" />  
+    <link type="text/css" rel="stylesheet" 
+          href="css/style.min.css" /> 
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div id="app">
+            <div class="main-wrapper main-wrapper-1">
+       
+                <div class="navbar-bg"></div>
+                
+                <div class="main-sidebar sidebar-style-2">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="dashboard.xhtml">Library School</a>
+                        </div>
+                        <div class="sidebar-brand sidebar-brand-sm">
+                            <a href="dashboard.xhtml">LS</a>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li>
+                                <a class="nav-link" href="login.xhtml">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                    <span>Hi,#{login_bean.username} </span>
+                                </a>
+                            </li>
+                            <li class="menu-header">Dashboard</li>
+                            <li class="active">
+                                <a class="nav-link" href="catalogBuku.xhtml">
+                                    <i class="fas fa-fire"></i>
+                                    <span>Pinjam Buku</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="catalogPinjam.xhtml">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                    <span>Kembalikan Buku</span>
+                                </a>
+                            </li>
+                              
+                            <li>
+                                <a class="nav-link" href="login.xhtml">
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                    <span>Log out </span>
+                                </a>
+                            </li>
+                        </ul>      
+                    </aside>
+                </div>
+                 <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h2>Buku Tersedia</h2>
+                </div>
+                <div class="section-body">
+                    <!--                            <h:form>
+                                                    <div class="d-flex align-items-center mb-4">
+                                                        <h:inputText class="mr-2 form-control" value="#{products.search}" a:placeholder="Search" />
+                                                        <div class="input-group-btn">
+                                                            <h:commandLink class="btn btn-primary" action="#{products.search()}">
+                                                                <i class="fas fa-search"></i> Search
+                                                            </h:commandLink>
+                                                        </div>
+                                                    </div>
+                                                </h:form>-->
+            
+                    
+                    <!-- <h2 class="text-gray font-weight-bold mb-3">New product</h2> -->
+                    <p:dialog id="pinjam" widgetVar="$pinjam" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+                        <h:form>
+                            <b:panelGrid columns="2" class="editClass">
+                                <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" update="@(.bookEditable)" />
+                                <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.bookEditable)" />
+                            </b:panelGrid>
+                        </h:form>
+                    </p:dialog>                          
+                    <div class="row d-flex flex-wrap mx-auto">
+                        <ui:repeat  value="#{bookBean.books}" var="book">
+                            <div class="card-custom mx-2 my-2" style="width: 23%; height: 30rem; overflow: hidden;">
+
+                                <div class="card-body d-flex flex-column justify-content-between" style="height: 12rem;">
+                                    <h3 class="text-center">#{book.judulBuku}</h3>
+                                    <p class="text-gray ">#{book.penerbit}</p>
+                                    <p class="text-gray">#{book.pengarang}</p>
+                                    <p class="text-gray">#{book.tahunPenerbit}</p>
+                                    <p class="text-gray">#{book.kategori}</p>
+
+                                    <h:form class="d-flex justify-content-between align-items-center align-content-center">
+                                        <b:commandButton  class="btn btn-custom" value="Pinjam" icon="check" ajax="true" update="@(.editableCarTable) " actionListener="#{bookBean.pinjam(book.idBuku, login_bean.username)}" onclick="ajax:car.edit();
+                                                        javascript:return false;" oncomplete="PF('pinjam').show()">
+                                        </b:commandButton>    
+
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+        </div>
+    </h:body>
+</html>
+
