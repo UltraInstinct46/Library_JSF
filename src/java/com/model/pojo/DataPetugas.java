@@ -14,7 +14,15 @@ public class DataPetugas  implements java.io.Serializable {
      private String namaPetugas;
      private String alamat;
      private String noTelp;
+     private String username;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public DataPetugas() {
     }
 
@@ -24,7 +32,12 @@ public class DataPetugas  implements java.io.Serializable {
        this.alamat = alamat;
        this.noTelp = noTelp;
     }
-   
+    public DataPetugas(String username, String namaPetugas, String alamat, String noTelp) {
+       this.username = username;
+       this.namaPetugas = namaPetugas;
+       this.alamat = alamat;
+       this.noTelp = noTelp;
+    }
     public Integer getIdPetugas() {
         return this.idPetugas;
     }

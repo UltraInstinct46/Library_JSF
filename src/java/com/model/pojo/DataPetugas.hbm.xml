@@ -8,9 +8,9 @@
             <column name="id_petugas" />
             <generator class="identity" />
         </id>
-        <many-to-one name="multiuserLogin" class="com.model.pojo.MultiuserLogin" fetch="select">
+        <property name="username" type="string">
             <column name="username" length="50" not-null="true" />
-        </many-to-one>
+        </property>
         <property name="namaPetugas" type="string">
             <column name="nama_petugas" length="50" not-null="true" />
         </property>

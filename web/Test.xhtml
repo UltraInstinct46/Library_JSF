@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:body>
+  <h:form>
+  <b:dataTable value="#{bookBean.books}" var="book" class="editableCarTable">
+    <b:dataTableColumn value="#{book.idBuku}" />
+    <b:dataTableColumn value="#{book.judulBuku}" />
+    <b:dataTableColumn value="#{book.penerbit}" />
+    <b:dataTableColumn value="#{book.pengarang}" />
+    <b:dataTableColumn value="#{book.tahunPenerbit}" />
+    <b:dataTableColumn value="#{book.kategori}" />
+    <b:dataTableColumn label="Price">
+      <b:inputText value="#{book.stok}" rendered="#{books.f}" />
+      <h:outputText value="#{book.stok}" rendered="#{not books.f}" />
+    </b:dataTableColumn>
+    <b:dataTableColumn>
+      <b:commandButton value="edit" icon="edit" ajax="true" update="@(.editableCarTable)"
+                       onclick="ajax:book.edit(); javascript:return false;" >
+      </b:commandButton>
+ 
+    </b:dataTableColumn>
+     
+    <b:dataTableColumn>
+      <b:commandButton value="Delete" iconAwesome="trash"
+                       action="#{bookBean.deleteBook(book)}">
+        <f:ajax execute="@this" render="@form" />
+      </b:commandButton>
+    </b:dataTableColumn>
+  </b:dataTable>
+</h:form>
+  </h:body>
+</html>

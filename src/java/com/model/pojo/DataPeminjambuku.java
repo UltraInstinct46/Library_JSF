@@ -16,13 +16,27 @@ public class DataPeminjambuku  implements java.io.Serializable {
      private String status;
      private Date tglPinjam;
      private Date tglPengembalian;
+     private Integer idBuku;
 
+    public Integer getIdBuku() {
+        return idBuku;
+    }
+
+    public void setIdBuku(Integer idBuku) {
+        this.idBuku = idBuku;
+    }
     public DataPeminjambuku() {
     }
 
 	
     public DataPeminjambuku(DataBuku dataBuku, String username, String status, Date tglPinjam) {
         this.dataBuku = dataBuku;
+        this.username = username;
+        this.status = status;
+        this.tglPinjam = tglPinjam;
+    }
+        public DataPeminjambuku(Integer idBuku, String username, String status, Date tglPinjam) {
+        this.idBuku = idBuku;
         this.username = username;
         this.status = status;
         this.tglPinjam = tglPinjam;

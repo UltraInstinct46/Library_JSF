@@ -5,36 +5,33 @@
  */
 package com.dao;
 
-import com.model.pojo.DataBuku;
-import com.model.pojo.DataPeminjambuku;
+import com.model.pojo.DataAnggota;
 import com.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author killua
  */
 
-public class BookDao {
-    private DataBuku book;
-    private DataBuku newbook;
-    private List<DataBuku> DaoAllBooks;
-    private List<DataBuku> DaoSearchBookList;
+public class AnggotaDao {
+    private DataAnggota anggota;
+    private DataAnggota newanggota;
+    private List<DataAnggota> DaoAllAnggotas;
+    private List<DataAnggota> DaoSearchAnggotaList;
     
-    public List<DataBuku> AllBooks(){
+    public List<DataAnggota> AllAnggotas(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
             session.beginTransaction();
-            DaoAllBooks = session.createCriteria(DataBuku.class).list();
-            int count = DaoAllBooks.size();
+            DaoAllAnggotas = session.createCriteria(DataAnggota.class).list();
+            int count = DaoAllAnggotas.size();
             FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
             session.getTransaction().commit();
         }catch(Exception e){
@@ -42,25 +39,7 @@ public class BookDao {
             session.getTransaction().rollback();
         }
         session.close();
-        return DaoAllBooks;
-    }
-    public List<DataBuku> BooksAvailable(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
-            session.beginTransaction();
-            Criteria criteria;
-            criteria = session.createCriteria(DataBuku.class);
-            criteria.add(Restrictions.gt("stok",0));
-            DaoAllBooks = criteria.list();
-            int count = DaoAllBooks.size();
-            FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"List Size", Integer.toString(count));
-            session.getTransaction().commit();
-        }catch(Exception e){
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }
-        session.close();
-        return DaoAllBooks;
+        return DaoAllAnggotas;
     }
     public Integer getId(){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -76,13 +55,13 @@ public class BookDao {
         return userId;
     }
     
-    public List<DataBuku> SearchByBookId(String bookId){
+    public List<DataAnggota> SearchByAnggotaId(String anggotaId){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<DataBuku> daoSearchList = new ArrayList<>();
+        List<DataAnggota> daoSearchList = new ArrayList<>();
         try{
             session.beginTransaction();
-            Query qu = session.createQuery("From Book U where U.bookId =:bookId");
-            qu.setParameter("bookId",bookId);
+            Query qu = session.createQuery("From Anggota U where U.anggotaId =:anggotaId");
+            qu.setParameter("anggotaId",anggotaId);
             daoSearchList = qu.list();
             int count = daoSearchList.size();
             session.getTransaction().commit();
@@ -95,14 +74,14 @@ public class BookDao {
         }
         return daoSearchList;
     }
-    public void add(DataBuku newbook){
+    public void add(DataAnggota newanggota){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-            String Id = Integer.toString(newbook.getIdBuku());
+            String Id = Integer.toString(newanggota.getIdAnggota());
             session.beginTransaction();
-            session.merge(newbook);
+            session.merge(newanggota);
             session.flush();
-            System.out.println("New user Saved, id : "+ newbook.getIdBuku());
+            System.out.println("New user Saved, id : "+ newanggota.getIdAnggota());
             session.getTransaction().commit();
         }catch(Exception e){
             e.printStackTrace();
@@ -110,12 +89,12 @@ public class BookDao {
         }
         session.close();
     }
-    public void delete(DataBuku book){
+    public void delete(DataAnggota anggota){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-            String name = book.getJudulBuku();
+            String name = anggota.getNamaAnggota();
             session.beginTransaction();
-            session.delete(book);
+            session.delete(anggota);
             session.getTransaction().commit();
         }catch(Exception e){
             e.printStackTrace();
@@ -123,11 +102,11 @@ public class BookDao {
         }
         session.close();
     }
-    public void update(DataBuku book){
+    public void update(DataAnggota anggota){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
         session.beginTransaction();
-        session.update(book);
+        session.update(anggota);
         session.flush();
         session.getTransaction().commit();
         }catch(Exception e){

@@ -1,0 +1,50 @@
+  <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+    <h:head>
+      <title>Books Data</title>
+    </h:head>
+    <h:body>
+      <style type="text/css">
+        .ui-row-editor .ui-row-editor-pencil {
+          margin-left: 8px;
+        }
+      </style>
+    <p:dialog id="loginDetail2" widgetVar="$loginDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2">
+          <b:inputText id="password" value="#{loginBean.login.password}" label="Password" placeholder="Password" />
+          <b:inputText id="role" label="Roles" value="#{loginBean.login.loginType}" placeholder="Roles Roles" />
+          <b:commandButton value="Update" ajax="true" icon="ui-icon-disk" actionListener="#{loginBean.UpdateLogin(loginBean.login)}" oncomplete="PF('$loginDetail2').hide()" update="@(.loginEditable)" />
+          <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+    <p:dialog id="loginDetail1" widgetVar="$loginDetail1" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2" class="editClass">
+          <b:inputText id="username" value="#{loginBean.newlogin.username}" label="Username" placeholder="Username" />
+          <b:inputText id="password" value="#{loginBean.newlogin.password}" label="Password" placeholder="Password" />
+          <b:inputText id="role" label="Roles" value="#{loginBean.newlogin.loginType}" placeholder="Roles Roles" />
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{loginBean.addLogin()}" oncomplete="PF('$loginDetail1').hide()" update="@(.loginEditable)" />
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.loginEditable)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+      <div class="card">
+            <h:form>
+              <b:commandButton value="Add" icon="edit" ajax="true" oncomplete="PF('$loginDetail1').show()" id="addUserBtn" style="margin-bottom: 10px;" />
+              <b:dataTable value="#{loginBean.logins}" var="login" class="loginEditable">
+                <b:dataTableColumn value="#{login.idLogin}" />
+                <b:dataTableColumn value="#{login.username}" />
+                <b:dataTableColumn value="#{login.password}" />
+                <b:dataTableColumn value="#{login.loginType}" />
+                <b:dataTableColumn value="">
+                  <p:commandButton value="Delete" icon="pi-trash" action="#{loginBean.deleteLogin(login)}">
+                    <f:ajax execute="@this" render="@form" />
+                  </p:commandButton>
+                  <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit" ajax="true" actionListener="#{loginBean.changeLogin(login)}"  oncomplete="PF('$loginDetail2').show()" update=":loginDetail2"/>
+                </b:dataTableColumn>
+              </b:dataTable>
+            </h:form>
+      </div>
+    </h:body>
+  </html>

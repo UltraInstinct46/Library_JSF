@@ -999,16 +999,24 @@ exists or setup the property manually. For example like this:
     <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
         <copyfiles files="${libs.primefaces.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.hibernate4-support.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.BootsFaces-OSP-1.5.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+<<<<<<< HEAD
+        <copyfiles files="${file.reference.mysql-connector-java-8.0.29.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+=======
         <copyfiles files="${file.reference.mysql-connector-java-8.0.29.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.BootsFaces-OSP-1.5.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+>>>>>>> f77ede00b732a208c07b5d75221b1f83f46cdb7d
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
         <copyfiles files="${libs.primefaces.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.hibernate4-support.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.BootsFaces-OSP-1.5.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+<<<<<<< HEAD
+        <copyfiles files="${file.reference.mysql-connector-java-8.0.29.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
+=======
         <copyfiles files="${file.reference.mysql-connector-java-8.0.29.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.BootsFaces-OSP-1.5.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+>>>>>>> f77ede00b732a208c07b5d75221b1f83f46cdb7d
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>BootsFaces Basic Page</title>
+    </h:head>
+    <h:body>
+     <p:dialog id="bookDetail2" widgetVar="$bookDetail2" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+
+          <b:dataTable value="#{bookBean.books}"
+           var="book"
+           caption="This is a BootsFaces example table. It shows a list of cars, but that's not what it's about. The cars are just a placeholder for your content.">
+    <b:dataTableColumn value="#{book.idBuku}" />
+    <b:dataTableColumn value="#{book.judulBuku}" />
+    <b:dataTableColumn value="#{book.penerbit}" />
+    <b:dataTableColumn value="#{book.pengarang}"/>
+    <b:dataTableColumn value="#{book.tahunPenerbit}" />
+    <b:dataTableColumn value="#{book.stok}"/>
+
+         
+        <p:panelGrid columns="2">
+          <h:outputLabel for="judul" value="Judul Buku: *" />
+          <b:inputText id="judul" value="#{bookBean.book.judulBuku}" label="Book Title" placeholder="Book Title" />
+          <h:outputLabel for="penerbit" value="Penerbit" />
+          <b:inputText id="penerbit" label="Penerbit" value="#{bookBean.book.penerbit}" placeholder="Penerbit" />
+          <h:outputLabel for="pengarang" value="Pengarang" />
+          <b:inputText id="pengarang" label="Pengarang" value="#{bookBean.book.pengarang}" placeholder="Pengarang" />
+          <p:outputLabel for="tahun" value="Tahun Penerbit" />
+          <b:inputText id="tahun" value="#{bookBean.book.tahunPenerbit}" label="Tahun Penerbit:" required="true" requiredMessage="Please Enter Published Date!" placeholder="Published Date" >
+              <f:convertNumber integerOnly="true" type="number" />
+          </b:inputText>
+          <p:outputLabel for="kategori" value="Kategori" />
+          <b:inputText id="kategori" label="Price" value="#{bookBean.book.kategori}" placeholder="price" />
+          <p:outputLabel for="stock" value="Stock" />
+          <b:inputText id="stock" label="Price" value="#{bookBean.book.stok}" placeholder="price" />
+         <p:commandButton value="Update" ajax="true" icon="ui-icon-disk"  actionListener="#{bookBean.UpdateBook(bookBean.book)}" oncomplete="PF('$bookDetail2').hide()" update="@(.bookEditable)"/>
+          <b:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />
+        </p:panelGrid>
+      </h:form>
+    </p:dialog>
+        
+    <p:dialog id="bookDetail1" widgetVar="$bookDetail1" header="Add 
+Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <p:panelGrid columns="2" class="editClass">
+          <h:outputLabel for="judul" value="Judul Buku: *" />
+          <b:inputText id="judul" value="#{bookBean.newbook.judulBuku}" label="Book Title" placeholder="Book Title" />
+          <h:outputLabel for="penerbit" value="Penerbit" />
+          <b:inputText id="penerbit" label="Penerbit" value="#{bookBean.newbook.penerbit}" placeholder="Penerbit" />
+          <h:outputLabel for="pengarang" value="Pengarang" />
+          <b:inputText id="pengarang" label="Pengarang" value="#{bookBean.newbook.pengarang}" placeholder="Pengarang" />
+          <p:outputLabel for="tahun" value="Tahun Penerbit" />
+          <b:inputText id="tahun" value="#{bookBean.newbook.tahunPenerbit}" label="Tahun Penerbit:" required="true" requiredMessage="Please Enter Published Date!" placeholder="Published Date" >
+              <f:convertNumber integerOnly="true" type="number" />
+          </b:inputText>
+          <p:outputLabel for="kategori" value="Kategori" />
+          <b:inputText id="kategori" label="Price" value="#{bookBean.newbook.kategori}" placeholder="price" />
+          <p:outputLabel for="stock" value="Stock" />
+          <b:inputText id="stock" label="Price" value="#{bookBean.newbook.stok}" placeholder="price" />
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" update="@(.bookEditable)"/>
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.bookEditable)"/>
+        </p:panelGrid>
+      </h:form>
+    </p:dialog>
+<h:form>
+    <b:commandButton value="Add" iconAwesome="add" ajax="true" oncomplete="PF('$bookDetail1').show()" id="addUserBtn"/>
+    <b:dataTable value="#{bookBean.books}"
+           var="book"
+           caption="This is a BootsFaces example table. It shows a list of cars, but that's not what it's about. The cars are just a placeholder for your content."
+           class="bookEditable">
+    <b:dataTableColumn value="#{book.idBuku}" />
+    <b:dataTableColumn value="#{book.judulBuku}" />
+    <b:dataTableColumn value="#{book.penerbit}" />
+    <b:dataTableColumn value="#{book.pengarang}" />
+    <b:dataTableColumn value="#{book.tahunPenerbit}" />
+    <b:dataTableColumn value="#{book.kategori}" />
+    <b:dataTableColumn value="#{book.stok}" />
+    
+    <b:dataTableColumn value="" >
+        <p:commandButton value="Delete" icon="pi-trash"
+                         action="#{bookBean.deleteBook(book)}">
+        <f:ajax execute="@this" render="@form" />
+      </p:commandButton>
+            <p:commandButton styleClass="ui-button-raised ui-button-info ui-button-flat" icon="ui-icon-pencil" id="editUserBtn" value="Edit  ..." ajax="true" actionListener="#{bookBean.changeBook(book)}" update=":bookDetail2" oncomplete="PF('$bookDetail2').show()" />
+<!--        <b:commandButton value="edit" icon="edit" ajax="true" update="@(.bookEditable)"
+                       onclick="ajax:book.edit(); javascript:return false;" >
+      </b:commandButton>-->
+    </b:dataTableColumn>
+    
+
+  </b:dataTable>
+</h:form>
+    </h:body>
+</html>
