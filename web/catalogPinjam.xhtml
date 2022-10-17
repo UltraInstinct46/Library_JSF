@@ -80,7 +80,15 @@
             
                     
                     <!-- <h2 class="text-gray font-weight-bold mb-3">New product</h2> -->
-                                          
+    <p:dialog id="kembalikan" widgetVar="$pinjam" header="Add Book" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">
+      <h:form>
+        <b:panelGrid columns="2" class="editClass">
+          <b:commandButton value="Add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus" actionListener="#{bookBean.addBook()}" oncomplete="PF('$bookDetail1').hide()" update="@(.bookEditable)" />
+          <b:commandButton process="@form" ajax="true" id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" update="@(.bookEditable)" />
+        </b:panelGrid>
+      </h:form>
+    </p:dialog>
+                                   
                     <div class="row d-flex flex-wrap mx-auto">
 
                         <ui:repeat value="#{peminjamBean.getBorrows(login_bean.username)}" var="peminjam" class="peminjamTable">
@@ -94,7 +102,8 @@
                                     <p class="text-gray">Tanggal Pinjam : #{peminjam.tglPinjam}</p>
 
                                     <h:form class="d-flex justify-content-between align-items-center align-content-center">
-                                        <b:commandButton  class="btn btn-custom" value="Kembalikan" icon="check" ajax="true" update="@(.peminjamTable) " actionListener="#{peminjamBean.pengembalian(peminjam.idPeminjam, peminjam.idBuku)}" onclick="ajax:car.edit();javascript:return false;">
+                                        <b:commandButton  class="btn btn-custom" value="Kembalikan" icon="check" ajax="true" update="@(.peminjamTable)" oncomplete="PF('kembalikan').show()" 
+                                                          actionListener="#{peminjamBean.pengembalian(peminjam.idPeminjam, peminjam.idBuku)}" onclick="ajax:car.edit();javascript:return false;">
                                         <f:ajax execute="@this" render="@form" />
                                         </b:commandButton>    
 
@@ -111,4 +120,3 @@
         </div>
     </h:body>
 </html>
-

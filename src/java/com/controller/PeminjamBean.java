@@ -155,6 +155,9 @@ public void onCancel(RowEditEvent event) {
             session.update(pengembalian);
             session.flush();
             System.out.println("New user Saved, id : "+ pengembalian.getIdBuku());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Save Information", "Buku Berhasil Dikembalikan.");
+
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
             session.getTransaction().commit();
         }catch(Exception e){
             e.printStackTrace();
